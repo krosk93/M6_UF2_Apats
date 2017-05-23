@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <h1>Gestió dels plats d'un àpat</h1>
     <sort-meals :model.sync="sort" />
     <ul class="pills">

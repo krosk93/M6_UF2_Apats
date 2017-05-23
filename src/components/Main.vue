@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>Gestió dels plats d'un àpat</h1>
     <input type="radio" id="sortCalorieCount" value="calorieCount" name="sort" v-model="sort">
     <label for="sortCalorieCount">KCal</label>
@@ -17,11 +17,11 @@
     <input type="number" id="newDifficulty" v-model="newDifficulty" number>
     <input type="number"id="newScore" v-model="newScore" number>
     <input type="number" id="newTime" v-model="newTime" number>
-    <input type="radio" id="newStarter" value="starter" name="newMeal" v-model="newMeal">
+    <input type="radio" id="newStarter" value="starters" name="newCategory" v-model="newCategory">
     <label for="newStarter">Primer Plat</label>
-    <input type="radio" id="newMain" value="main" name="newMeal" v-model="newMeal">
+    <input type="radio" id="newMain" value="mains" name="newCategory" v-model="newCategory">
     <label for="newMain">Segon Plat</label>
-    <button id="newItem" @click="addItem">Afegir</button>
+    <button id="newItem" @click="addMeal">Afegir</button>
     <br>
     <input type="number" id="startersDesiredCalorieCount" v-model="startersDesiredCalorieCount" number>
     <label for="startersDesiredCalorieCount">KCal desitjades primer plat</label>
@@ -46,12 +46,13 @@
 import CourseTable from '@/components/CourseTable'
 
 export default {
-  name: 'hello',
+  name: 'main',
   data () {
     return {
-      starters: [
+      meals: [
         {
           name: 'Espinacs',
+          category: 'starters',
           calorieCount: 18,
           difficulty: 1,
           score: 3,
@@ -59,6 +60,7 @@ export default {
         },
         {
           name: 'Pèsols',
+          category: 'starters',
           calorieCount: 37,
           difficulty: 0,
           score: 3,
@@ -66,6 +68,7 @@ export default {
         },
         {
           name: 'Bledes',
+          category: 'starters',
           calorieCount: 40,
           difficulty: 1,
           score: 2,
@@ -73,15 +76,15 @@ export default {
         },
         {
           name: 'Espàrrecs',
+          category: 'starters',
           calorieCount: 45,
           difficulty: 0,
           score: 2,
           time: 10
-        }
-      ],
-      mains: [
+        },
         {
           name: 'Vedella',
+          category: 'mains',
           calorieCount: 77,
           difficulty: 2,
           score: 2,
@@ -89,6 +92,7 @@ export default {
         },
         {
           name: 'Peix blau',
+          category: 'mains',
           calorieCount: 80,
           difficulty: 1,
           score: 2,
@@ -96,6 +100,7 @@ export default {
         },
         {
           name: 'Pollastre',
+          category: 'mains',
           calorieCount: 83,
           difficulty: 0,
           score: 2,
@@ -103,6 +108,7 @@ export default {
         },
         {
           name: 'Embotits',
+          category: 'mains',
           calorieCount: 97,
           difficulty: 0,
           score: 1,
@@ -115,55 +121,59 @@ export default {
       newDifficulty: 1,
       newScore: 3,
       newTime: 15,
-      newMeal: 'starter',
+      newCategory: 'starters',
       startersDesiredCalorieCount: 39,
       mainsDesiredCalorieCount: 85
     }
   },
+  computed: {
+    starters () {
+      return this.meals.filter(x => x.category === 'starters')
+    },
+    mains () {
+      return this.meals.filter(x => x.category === 'mains')
+    }
+  },
   components: { CourseTable },
   methods: {
-    addItem () {
+    addMeal () {
       const meal = {
         name: this.newName,
         calorieCount: Number(this.newCalorieCount),
         difficulty: Number(this.newDifficulty),
         score: Number(this.newScore),
-        time: Number(this.newTime)
+        time: Number(this.newTime),
+        category: this.newCategory
       }
-      if (this.newMeal === 'starter') this.starters.push(meal)
-      else this.mains.push(meal)
-      this.clearItem()
+      this.meals.push(meal)
+      this.clearMeal()
     },
-    clearItem () {
+    clearMeal () {
       this.newName = ''
       this.newCalorieCount = 50
       this.newDifficulty = 1
       this.newScore = 3
       this.newTime = 15
-      this.newMeal = 'starter'
+      this.newCategory = 'starters'
+    },
+    findMeal (category, name) {
+      if (category === 'starters') {
+        return this.starters.findIndex(x => x.name === name)
+      } else if (category === 'mains') {
+        return this.mains.findIndex(x => x.name === name)
+      }
+      return -1
+    },
+    deleteMeal (category, name) {
+
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 
 .course-tables {

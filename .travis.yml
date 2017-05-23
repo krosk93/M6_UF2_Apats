@@ -6,4 +6,6 @@ cache:
 dist: trusty
 sudo: false
 before_script:
+  - "sh -e /etc/init.d/xvfb start"
+  - "export DISPLAY=:99.0"
   - jdk_switcher use oraclejdk8

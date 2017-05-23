@@ -32,7 +32,12 @@ export default {
         const testB = Math.abs(this.desiredCalorieCount - b.calorieCount)
         return testA - testB
       })
-      return closest[0]
+      if (closest.length === 0) return null
+      const sameKcal = this.meals
+        .filter(x => x.calorieCount === closest[0].calorieCount)
+        .map(x => x.name)
+        .join(', ')
+      return sameKcal
     }
   },
   components: { Course }
@@ -58,7 +63,7 @@ export default {
         <course v-for="meal in sortedMeals" :meal="meal" :key="meal"></course>
       </tbody>
     </table>
-    <p>Plat que s'apropa més a {{ desiredCalorieCount }}KCal: {{ !!closestKcal ? closestKcal.name : "No n'hi ha." }}</p>
+    <p>Plat que s'apropa més a {{ desiredCalorieCount }}KCal: {{ !!closestKcal ? closestKcal : "No n'hi ha." }}</p>
   </div>
 </template>
 

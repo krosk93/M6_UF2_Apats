@@ -11,34 +11,36 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.hello')
       .assert.elementCount('.meal', 8)
       .end();
   },
   'Add Starter': function test(browser) {
     const devServer = browser.globals.devServerURL;
-
     browser
       .url(devServer)
-      .waitForElementVisible('#app', 5000)
-      .setValue('input#newName', 'Escudella')
+      .expect.element('#app').to.be.visible.before(1000)
+    browser.click('#linkAdd')
+      .expect.element('input#newName').to.be.visible.before(1000)
+    browser.setValue('input#newName', 'Escudella')
       .setValue('input#newCalorieCount', 30)
       .setValue('input#newDifficulty', 2)
       .setValue('input#newScore', 4)
       .setValue('input#newTime', 120)
       .click('input#newStarter')
       .click('button#newItem')
-      .waitForElementVisible('.meal[name=Escudella]', 1000)
-      .assert.elementCount('.meal', 9)
+      .expect.element('.meal[name=Escudella]').to.be.visible.before(1000)
+    browser.assert.elementCount('.meal', 9)
       .assert.value('input#newName', '')
-      .end();
+      .end()
   },
   'Add Main': function test(browser) {
     const devServer = browser.globals.devServerURL;
 
     browser
       .url(devServer)
-      .waitForElementVisible('#app', 5000)
+      .waitForElementVisible('#app', 1000)
+      .click('#linkAdd')
+      .waitForElementVisible('input#newName', 1000)
       .setValue('input#newName', 'Fricandó')
       .setValue('input#newCalorieCount', 110)
       .setValue('input#newDifficulty', 2)
@@ -56,7 +58,9 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('#app', 5000)
+      .waitForElementVisible('#app', 1000)
+      .click('#linkAdd')
+      .waitForElementVisible('input#newName', 1000)
       .setValue('input#newName', 'Escudella')
       .setValue('input#newCalorieCount', 30)
       .setValue('input#newDifficulty', 2)

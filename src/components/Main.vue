@@ -14,9 +14,9 @@
     <label for="sortTime">Temps</label>
     <br>
     <ul class="pills">
-      <li :class="{ active: tab === 'add' }"><a href="#" @click.prevent="changeTab('add')">Afegir plats</a></li>
-      <li :class="{ active: tab === 'choose' }"><a href="#" @click.prevent="changeTab('choose')">Triar plats</a></li>
-      <li :class="{ active: tab === 'delete' }"><a href="#" @click.prevent="changeTab('delete')">Esborrar plats</a></li>
+      <li :class="{ active: tab === 'add' }"><a href="#" id="linkAdd" @click.prevent="changeTab('add')">Afegir plats</a></li>
+      <li :class="{ active: tab === 'choose' }"><a href="#" id="linkChoose" @click.prevent="changeTab('choose')">Triar plats</a></li>
+      <li :class="{ active: tab === 'delete' }"><a href="#" id="linkDelete" @click.prevent="changeTab('delete')">Esborrar plats</a></li>
     </ul>
     <div v-show="tab === 'add'">
       <h2>Afegir plats</h2>

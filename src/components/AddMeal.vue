@@ -3,10 +3,12 @@
     <h2>Afegir plats</h2>
     <input type="text" id="newName" name="Nom" v-model="name" v-validate="'required'" placeholder="Nom" />
     <span v-if="errors.has('Nom')" class="error">{{ errors.first('Nom') }}</span>
-    <input type="number" id="newCalorieCount" v-model.number="calorieCount">
+    <input type="number" id="newCalorieCount" name="KCal" v-model.number="calorieCount" v-validate="'min_value:0'">
+    <span v-if="errors.has('KCal')" class="error">{{ errors.first('KCal') }}</span>
     <input type="number" id="newDifficulty" v-model.number="difficulty">
     <input type="number"id="newScore" v-model.number="score">
-    <input type="number" id="newTime" v-model.number="time">
+    <input type="number" id="newTime" name="Temps" v-model.number="time" v-validate="'min_value:0'">
+    <span v-if="errors.has('Temps')" class="error">{{ errors.first('Temps') }}</span>
     <input type="radio" id="newStarter" value="starters" name="newCategory" v-model="stringCategory">
     <label for="newStarter">Primer Plat</label>
     <input type="radio" id="newMain" value="mains" name="newCategory" v-model="stringCategory">
@@ -27,7 +29,9 @@ export default {
       difficulty: 1,
       score: 3,
       time: 15,
-      stringCategory: 'starters'
+      stringCategory: 'starters',
+      possibleDifficulties: ['Baixa', 'Mitja', 'Alta'],
+      possibleScores: ['*', '**', '***', '****', '*****']
     }
   },
   computed: {

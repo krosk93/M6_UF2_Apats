@@ -21,8 +21,8 @@ export default {
   <tr class="meal" :name="meal.name">
     <td class="mealCalorieCount">{{ meal.calorieCount }}</td>
     <td class="mealName">{{ meal.name }}</td>
-    <td class="mealDifficulty">{{ mealDifficulty }}</td>
-    <td class="mealScore">{{ mealScore }}</td>
+    <td class="mealDifficulty">{{ meal.stringDifficulty() }}</td>
+    <td class="mealScore">{{ meal.stringScore() }}</td>
     <td class="mealTime">{{ meal.time }}</td>
   </tr>
 </template>

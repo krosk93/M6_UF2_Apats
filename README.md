@@ -1,30 +1,30 @@
-# apats
+# Àpats [![Build Status](https://travis-ci.org/krosk93/M6_UF2_Apats.svg?branch=master)](https://travis-ci.org/krosk93/M6_UF2_Apats)
 
-> Projecte UF2 M6
+> Projecte de l'UF2 de M6 (Desenvolupament d'Aplicacions Web Entorn Client) del cicle Desenvolupament d'Aplicacions Web.
 
-## Build Setup
+## Instruccions
 
 ``` bash
-# install dependencies
+# Per a instal·lar dependències
 npm install
 
-# serve with hot reload at localhost:8080
+# Una vegada instal·lades, per a arrancar un servidor de desenvolupament
 npm run dev
 
-# build for production with minification
+# Per a compilar una versió per a producció
 npm run build
 
-# build for production and view the bundle analyzer report
+# Igual que l'anterior, però amb un informe del bundle generat
 npm run build --report
 
-# run unit tests
+# Executar les proves unitaries
 npm run unit
 
-# run e2e tests
+# Executar les proves amb navegador
 npm run e2e
 
-# run all tests
+# Executar totes les proves
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+[Servidor de demo](https://totcopies.cat/apats/) (Pot no estar actualitzat a l'ultima versió)

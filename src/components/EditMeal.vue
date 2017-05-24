@@ -38,7 +38,7 @@ export default {
     return {
       selectedIndex: 0,
       possibleDifficulties: ['Baixa', 'Mitja', 'Alta'],
-      possibleScores: ['*', '**', '***', '****', '*****']
+      possibleScores: ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐']
     }
   },
   props: ['meals']
@@ -91,6 +91,7 @@ h2 {
 
   & > select {
     display: inline-block;
+    outline: none;
     border-radius: 0.25rem;
     padding: 0.5rem;
     border: 1px solid darken($ordinary, 20%);

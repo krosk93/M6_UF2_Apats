@@ -50,7 +50,7 @@ export default {
       time: 15,
       stringCategory: 'starters',
       possibleDifficulties: ['Baixa', 'Mitja', 'Alta'],
-      possibleScores: ['*', '**', '***', '****', '*****']
+      possibleScores: ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐']
     }
   },
   props: ['mealNames'],

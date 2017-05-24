@@ -24,12 +24,16 @@
       <edit-meal :meals="meals" />
     </div>
     <div class="course-tables">
-      <course-table title="Primers Plats"
+      <course-table
+        class="course-table"
+        title="Primers Plats"
         :meals="starters"
         :sort="sort"
         :desiredCalorieCount="startersDesiredCalorieCount"
       />
-      <course-table title="Segons Plats"
+      <course-table
+        class="course-table"
+        title="Segons Plats"
         :meals="mains"
         :sort="sort"
         :desiredCalorieCount="mainsDesiredCalorieCount"
@@ -143,6 +147,12 @@ ul.pills {
 
 .course-tables {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+
+  .course-table {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+  }
 }
 </style>

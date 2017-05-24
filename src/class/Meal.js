@@ -29,7 +29,7 @@ export default class Meal {
   }
 
   stringScore () : string {
-    return Array(this.score + 1).join('*')
+    return Array(this.score + 1).join('⭐')
   }
 
 }

@@ -1,89 +1,47 @@
 <template>
   <div>
-    <h2>Afegir plats</h2>
+    <h2>Editar plats</h2>
     <div class="form-group">
-      <label for="newName">Nom del plat:</label>
-      <input type="text" id="newName" name="Nom" :class="{error: errors.has('Nom')}" v-model="name" v-validate="`required|not_in:${mealNames}`" placeholder="Nom" autofocus />
-      <span v-if="errors.has('Nom')" class="error">{{ errors.first('Nom') }}</span>
+      <label for="editName">Nom del plat:</label>
+      <select id="editName" v-model="selectedIndex">
+        <option v-for="(sMeal, index) in meals" :value="index">{{ sMeal.name }}</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="newCalorieCount">KCalories:</label>
-      <input type="number" id="newCalorieCount" name="KCal" :class="{error: errors.has('KCal')}" v-model.number="calorieCount" v-validate="'required|min_value:0'">
+      <input type="number" id="newCalorieCount" name="KCal" :class="{error: errors.has('KCal')}" v-model.number="meals[selectedIndex].calorieCount" v-validate="'required|min_value:0'">
       <span v-if="errors.has('KCal')" class="error">{{ errors.first('KCal') }}</span>
     </div>
     <div class="form-group">
       <label for="newDifficulty">Dificultat:</label>
-      <select id="newDifficulty" v-model.number="difficulty">
+      <select id="newDifficulty" v-model.number="meals[selectedIndex].difficulty">
         <option v-for="(possibleDifficulty, index) in possibleDifficulties" :value="index">{{ possibleDifficulty }}</option>
       </select>
       <label for="newScore">Puntuació:</label>
-      <select id="newScore" v-model.number="score">
+      <select id="newScore" v-model.number="meals[selectedIndex].score">
         <option v-for="(possibleScore, index) in possibleScores" :value="index + 1">{{ possibleScore }}</option>
       </select>
     </div>
     <div class="form-group">
       <label for="newTime">Temps:</label>
-      <input type="number" id="newTime" name="Temps" :class="{error: errors.has('Temps')}" v-model.number="time" v-validate="'required|min_value:0'">
+      <input type="number" id="newTime" name="Temps" :class="{error: errors.has('Temps')}" v-model.number="meals[selectedIndex].time" v-validate="'required|min_value:0'">
       <span v-if="errors.has('Temps')" class="error">{{ errors.first('Temps') }}</span>
     </div>
-    <input type="radio" id="newStarter" value="starters" name="newCategory" v-model="stringCategory">
-    <label for="newStarter">Primer Plat</label>
-    <input type="radio" id="newMain" value="mains" name="newCategory" v-model="stringCategory">
-    <label for="newMain">Segon Plat</label>
-    <br>
-    <button id="newItem" :disabled="errors.any()" @click.prevent="addMeal">Afegir</button>
   </div>
 </template>
 
 <script>
-import MEALTYPE from '@/lib/MealType'
-import Meal from '@/class/Meal'
 
 export default {
-  name: 'add-meal',
+  name: 'edit-meal',
   data () {
     return {
-      name: '',
-      calorieCount: 50,
-      difficulty: 1,
-      score: 3,
-      time: 15,
-      stringCategory: 'starters',
+      selectedIndex: 0,
       possibleDifficulties: ['Baixa', 'Mitja', 'Alta'],
       possibleScores: ['*', '**', '***', '****', '*****']
     }
   },
-  props: ['mealNames'],
-  computed: {
-    category () {
-      switch (this.stringCategory) {
-        case 'starters':
-          return MEALTYPE.STARTER
-        case 'mains':
-          return MEALTYPE.MAIN
-        default:
-          return null
-      }
-    },
-    meal () {
-      return new Meal(this.name, this.category, this.calorieCount, this.difficulty, this.score,
-        this.time)
-    }
-  },
-  methods: {
-    addMeal () {
-      this.$emit('newMeal', this.meal)
-      this.clearMeal()
-    },
-    clearMeal () {
-      this.name = ''
-      this.calorieCount = 50
-      this.difficulty = 1
-      this.score = 3
-      this.time = 15
-      this.stringCategory = 'starters'
-    }
-  }
+  props: ['meals']
 }
 </script>
 

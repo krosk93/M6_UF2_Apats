@@ -2,11 +2,11 @@
 // http://nightwatchjs.org/guide#usage
 
 module.exports = {
-  'Initial testing': function test(browser) {
+  'Initial testing': function test (browser) {
     // automatically uses dev Server port from /config.index.js
     // default: http://localhost:8080
     // see nightwatch.conf.js
-    const devServer = browser.globals.devServerURL;
+    const devServer = browser.globals.devServerURL
 
     browser
       .url(devServer)
@@ -15,8 +15,8 @@ module.exports = {
       .assert.elementCount('.meal', 8)
       .end()
   },
-  'Add Starter': function test(browser) {
-    const devServer = browser.globals.devServerURL;
+  'Add Starter': function test (browser) {
+    const devServer = browser.globals.devServerURL
     browser
       .url(devServer)
       .expect.element('#app').to.be.visible.before(1000)
@@ -37,8 +37,8 @@ module.exports = {
       .assert.value('input#newName', '')
       .end()
   },
-  'Add Main': function test(browser) {
-    const devServer = browser.globals.devServerURL;
+  'Add Main': function test (browser) {
+    const devServer = browser.globals.devServerURL
 
     browser
     .url(devServer)
@@ -60,8 +60,8 @@ module.exports = {
       .assert.value('input#newName', '')
       .end()
   },
-  'Add Various Meals': function test(browser) {
-    const devServer = browser.globals.devServerURL;
+  'Add Various Meals': function test (browser) {
+    const devServer = browser.globals.devServerURL
 
     browser
       .url(devServer)
@@ -101,6 +101,6 @@ module.exports = {
       .click('button#newItem')
       .waitForElementVisible('.meal[name=Fricandó]', 1000)
       .assert.elementCount('.meal', 12)
-      .end();
+      .end()
   }
-};
+}

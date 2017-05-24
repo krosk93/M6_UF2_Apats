@@ -5,10 +5,11 @@
     <ul class="pills">
       <li :class="{ active: tab === 'add' }"><a href="#" id="linkAdd" @click.prevent="changeTab('add')">Afegir plats</a></li>
       <li :class="{ active: tab === 'choose' }"><a href="#" id="linkChoose" @click.prevent="changeTab('choose')">Triar plats</a></li>
+      <li :class="{ active: tab === 'edit' }"><a href="#" id="linkEdit" @click.prevent="changeTab('edit')">Editar plats</a></li>
       <li :class="{ active: tab === 'delete' }"><a href="#" id="linkDelete" @click.prevent="changeTab('delete')">Esborrar plats</a></li>
     </ul>
     <div v-show="tab === 'add'">
-      <add-meal @newMeal="addMeal" />
+      <add-meal @newMeal="addMeal" :mealNames="meals.map(x => x.name)" />
     </div>
     <div v-show="tab === 'choose'">
       <choose-meal
@@ -18,6 +19,9 @@
     </div>
     <div v-show="tab === 'delete'">
       <delete-meal :starters="starters" :mains="mains" @deleteMeal="deleteMeal" />
+    </div>
+    <div v-show="tab === 'edit'">
+      <edit-meal :meals="meals" />
     </div>
     <div class="course-tables">
       <course-table title="Primers Plats"
@@ -40,6 +44,7 @@ import AddMeal from '@/components/AddMeal'
 import DeleteMeal from '@/components/DeleteMeal'
 import SortMeals from '@/components/SortMeals'
 import ChooseMeal from '@/components/ChooseMeal'
+import EditMeal from '@/components/EditMeal'
 import Meal from '@/class/Meal'
 import MEALTYPE from '@/lib/MealType'
 
@@ -71,7 +76,7 @@ export default {
       return this.meals.filter(x => x.category === MEALTYPE.MAIN)
     }
   },
-  components: { CourseTable, AddMeal, DeleteMeal, SortMeals, ChooseMeal },
+  components: { CourseTable, AddMeal, DeleteMeal, SortMeals, ChooseMeal, EditMeal },
   methods: {
     addMeal (meal) {
       this.meals.push(meal)
